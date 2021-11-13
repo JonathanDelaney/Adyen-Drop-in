@@ -14,7 +14,7 @@ getClientKey().then(clientKey => {
                 state.data.reference = "JonathanDelaney_adyenrecruitment";
                 state.data.returnUrl = "https://docs.adyen.com/";
                 state.data.merchantAccount = "AdyenRecruitmentCOM";
-                state.data.additionalData = {RequestedTestAcquirerResponseCode: "Refused"};
+                // state.data.additionalData = {RequestedTestAcquirerResponseCode: "Refused"};
                 // state.data;
                 // state.isValid;
                 makePayment(state.data);
