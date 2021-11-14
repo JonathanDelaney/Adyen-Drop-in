@@ -1,3 +1,4 @@
+const dropinContainer = document.querySelector('#dropin-container');
 const paymentMethodsConfig = {
     shopperReference: 'Checkout Components sample code test',
     reference: 'Checkout Components sample code test',
@@ -58,19 +59,21 @@ const makePayment = (paymentMethod, config = {}) => {
     const paymentsConfig = { ...paymentsDefaultConfig, ...config };
     const paymentRequest = { ...paymentsConfig, ...paymentMethod };
 
-    updateRequestContainer(paymentRequest);
+    // updateRequestContainer(paymentRequest);
 
     return httpPost('payments', paymentRequest)
         .then(response => {
             if (response.resultCode == "Authorised"){
                 console.log("do stuf");
+                dropinContainer.innerHTML = "<h1>Well Done!</h1>";
             } else {
                 console.log("errorbop");
+                dropinContainer.innerHTML = "<h1>Hard Luck!</h1>";
             }
 
             if (response.error) throw 'Payment initiation failed';
 
-            updateResponseContainer(response);
+            // updateResponseContainer(response);
 
             return response;
         })

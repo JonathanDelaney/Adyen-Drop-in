@@ -25,10 +25,15 @@ getClientKey().then(clientKey => {
         const dropin = checkout
             .create('dropin', {
                 openFirstPaymentMethod: false,
+                openFirstStoredPaymentMethod: false,
+                showPaymentMethods: true,
+                showStoredPaymentMethods: true,
+                showRemovePaymentMethodButton: true,
+                showPayButton: true,
                 // Events
-                onSelect: activeComponent => {
-                    if (activeComponent.state && activeComponent.state.data) updateStateContainer(activeComponent.data); // Demo purposes only
-                }
+                // onSelect: activeComponent => {
+                //     if (activeComponent.state && activeComponent.state.data) updateStateContainer(activeComponent.data); // Demo purposes only
+                // }
             })
             .mount('#dropin-container');
     });
