@@ -7,9 +7,9 @@ getClientKey().then(clientKey => {
             clientKey: clientKey, // Mandatory. clientKey from Customer Area
             paymentMethodsResponse,
             removePaymentMethods: ['paysafecard', 'c_cash'],
-            onChange: state => {
-                updateStateContainer(state); // Demo purposes only
-            },
+            // onChange: state => {
+            //     updateStateContainer(state); // Demo purposes only
+            // },
             onSubmit: (state, component) => {
                 state.data.reference = "JonathanDelaney_adyenrecruitment";
                 state.data.returnUrl = "https://docs.adyen.com/";
