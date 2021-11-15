@@ -7,16 +7,11 @@ getClientKey().then(clientKey => {
             clientKey: clientKey, // Mandatory. clientKey from Customer Area
             paymentMethodsResponse,
             removePaymentMethods: ['paysafecard', 'c_cash'],
-            // onChange: state => {
-            //     updateStateContainer(state); // Demo purposes only
-            // },
             onSubmit: (state, component) => {
                 state.data.reference = "JonathanDelaney_adyenrecruitment";
                 state.data.returnUrl = "https://docs.adyen.com/";
                 state.data.merchantAccount = "AdyenRecruitmentCOM";
-                // state.data.additionalData = {RequestedTestAcquirerResponseCode: "Refused"};
-                // state.data;
-                // state.isValid;
+                // state.data.additionalData = {RequestedTestAcquirerResponseCode: "Refused"}; // Uncommented to simulate a refused payment
                 makePayment(state.data);
             }
         });
@@ -30,11 +25,19 @@ getClientKey().then(clientKey => {
                 showStoredPaymentMethods: true,
                 showRemovePaymentMethodButton: true,
                 showPayButton: true,
-                // Events
-                // onSelect: activeComponent => {
-                //     if (activeComponent.state && activeComponent.state.data) updateStateContainer(activeComponent.data); // Demo purposes only
-                // }
             })
             .mount('#dropin-container');
     });
+});
+
+var lastScrollTop = 0;
+$(window).scroll(function(event) {
+    var st = $(this).scrollTop();
+    if (st > lastScrollTop) {
+        console.log("Oi")
+        $(".info").hide();
+    } else {
+        $(".info").hide();
+    }
+    lastScrollTop = st;
 });
