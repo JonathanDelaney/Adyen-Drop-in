@@ -30,7 +30,7 @@ h3 {
 
 h1 {
     font-size: 2em;
-    margin: 24px 0;
+    margin: 0px auto;
     line-height: 38px;
 }
 
@@ -133,7 +133,7 @@ a:link:hover {
 }
 
 .container {
-    margin: auto;
+    padding: 24px 0px;
 }
 
 .container--full-width {

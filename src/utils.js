@@ -19,18 +19,16 @@ const paymentsDefaultConfig = {
         value: 1000,
         currency: 'EUR'
     },
-    lineItems: [
-        {
-            id: '1',
-            description: 'Test Item 1',
-            amountExcludingTax: 10000,
-            amountIncludingTax: 11800,
-            taxAmount: 1800,
-            taxPercentage: 1800,
-            quantity: 1,
-            taxCategory: 'High'
-        }
-    ]
+    lineItems: [{
+        id: '1',
+        description: 'Test Item 1',
+        amountExcludingTax: 10000,
+        amountIncludingTax: 11800,
+        taxAmount: 1800,
+        taxPercentage: 1800,
+        quantity: 1,
+        taxCategory: 'High'
+    }]
 };
 
 // Generic POST Helper
@@ -47,24 +45,24 @@ const httpPost = (endpoint, data) =>
 // Get all available payment methods from the local server
 const getPaymentMethods = () =>
     httpPost('paymentMethods', paymentMethodsConfig)
-        .then(response => {
-            if (response.error) throw 'No paymentMethods available';
+    .then(response => {
+        if (response.error) throw 'No paymentMethods available';
 
-            return response;
-        })
-        .catch(console.error);
+        return response;
+    })
+    .catch(console.error);
 
 // Posts a new payment into the local server
 const makePayment = (paymentMethod, config = {}) => {
-    const paymentsConfig = { ...paymentsDefaultConfig, ...config };
-    const paymentRequest = { ...paymentsConfig, ...paymentMethod };
+    const paymentsConfig = {...paymentsDefaultConfig, ...config };
+    const paymentRequest = {...paymentsConfig, ...paymentMethod };
 
 
     return httpPost('payments', paymentRequest)
         .then(response => {
-            if (response.resultCode == "Authorised"){
+            if (response.resultCode == "Authorised") {
                 paymentReference = response.pspReference
-                dropinContainer.innerHTML = `<h1>Well Done!</h1><p>Your reference is: ${ paymentReference }</p>`;
+                dropinContainer.innerHTML = `<h1>Well Done!</h1><p>Your PSP reference is: ${ paymentReference }</p><p><a href='./dropin'>Test again</a></p>`;
             } else {
                 dropinContainer.innerHTML = "<h1>Hard Luck!</h1><a href='./dropin'>Try again!</a>";
             }
@@ -80,19 +78,19 @@ const makePayment = (paymentMethod, config = {}) => {
 // Fetches an originKey from the local server
 const getOriginKey = () =>
     httpPost('originKeys')
-        .then(response => {
-            if (response.error || !response.originKeys) throw 'No originKey available';
+    .then(response => {
+        if (response.error || !response.originKeys) throw 'No originKey available';
 
-            return response.originKeys[Object.keys(response.originKeys)[0]];
-        })
-        .catch(console.error);
+        return response.originKeys[Object.keys(response.originKeys)[0]];
+    })
+    .catch(console.error);
 
 // Fetches a clientKey from the 
 const getClientKey = () =>
     httpPost('clientKeys')
-        .then(response => {
-            if (response.error || !response.clientKey) throw 'No clientKey available';
+    .then(response => {
+        if (response.error || !response.clientKey) throw 'No clientKey available';
 
-            return response.clientKey;
-        })
-        .catch(console.error);
+        return response.clientKey;
+    })
+    .catch(console.error);

@@ -25,19 +25,8 @@ getClientKey().then(clientKey => {
                 showStoredPaymentMethods: true,
                 showRemovePaymentMethodButton: true,
                 showPayButton: true,
+                locale: "nl-NL",
             })
             .mount('#dropin-container');
     });
-});
-
-var lastScrollTop = 0;
-$(window).scroll(function(event) {
-    var st = $(this).scrollTop();
-    if (st > lastScrollTop) {
-        console.log("Oi")
-        $(".info").hide();
-    } else {
-        $(".info").hide();
-    }
-    lastScrollTop = st;
 });
